@@ -1,3 +1,5 @@
+import React from 'react';
+
 import HomeContainer from './Home.style';
 // import logo from '../../assets/SVG/logo.svg';
 import Login from '../Login/Login';

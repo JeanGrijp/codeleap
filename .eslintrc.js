@@ -18,11 +18,6 @@ module.exports = {
     'react',
   ],
   rules: {
-    'react/react-in-jsx-scope': 'off',
-    'linebreak-style': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
-    'import/no-named-as-default': 'off',
-    'react/jsx-no-bind': 'off',
-    'react/jsx-no-constructed-context-values': 'off',
   },
 };

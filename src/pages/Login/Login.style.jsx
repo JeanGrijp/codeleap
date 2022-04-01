@@ -129,19 +129,20 @@ export const Form = styled.form`
     
     div.step2 {
       width: 100%;
-
       display: flex;
       justify-content: space-around;
       align-items: flex-start;
       flex-direction: column;
 
       label {
+        width: 100%;
+
         font-size: 1rem;
         font-weight: 400;
       }
       input {
         width: 100%;
-        height: 25px;
+        height: 30px;
         border: 2px solid #000000;
         background-color: none;
         border-radius: 5px;
@@ -159,11 +160,12 @@ export const Form = styled.form`
       button {
         border-radius: 5px;
         width: 25%;
-        height: 25px;
-        background-color: #000000;
+        height: 30px;
+        background-color: ${(props) => (props.disb ? '#000000' : '#c4c4c4')};
         color: #ffffff;
         border: none;
-        cursor: pointer;
+        cursor: ${(props) => (props.disb ? 'pointer' : 'not-allowed')};
+
       }
     }
 
@@ -193,13 +195,15 @@ export const Form = styled.form`
       align-items: flex-start;
       flex-direction: column;
 
-      label {
+      label {        
+        width: 100%;
         font-size: 1rem;
         font-weight: 400;
       }
       input {
         width: 100%;
-        height: 25px;
+        height: 30px;
+
         border: 2px solid #000000;
         background-color: none;
         border-radius: 5px;
@@ -218,11 +222,11 @@ export const Form = styled.form`
         border-radius: 5px;
         width: 25%;
         max-width: 100px;
-        height: 25px;
-        background-color: #000000;
+        height: 30px;
+        background-color: ${(props) => (props.disb ? '#000000' : '#c4c4c4')};
         color: #ffffff;
         border: none;
-        cursor: pointer;
+        cursor: ${(props) => (props.disb ? 'pointer' : 'not-allowed')};
       }
     }
   }
@@ -252,12 +256,13 @@ export const Form = styled.form`
       flex-direction: column;
 
       label {
+        width: 100%;
         font-size: 1rem;
         font-weight: 400;
       }
       input {
         width: 100%;
-        height: 25px;
+        height: 30px;
         border: 2px solid #000000;
         background-color: none;
         border-radius: 5px;
@@ -276,11 +281,11 @@ export const Form = styled.form`
         border-radius: 5px;
         width: 25%;
         max-width: 100px;
-        height: 25px;
-        background-color: #000000;
+        height: 30px;
+        background-color: ${(props) => (props.disb ? '#000000' : '#c4c4c4')};
         color: #ffffff;
         border: none;
-        cursor: pointer;
+        cursor: ${(props) => (props.disb ? 'pointer' : 'not-allowed')};
       }
     }
   }
