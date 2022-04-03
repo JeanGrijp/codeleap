@@ -1,0 +1,82 @@
+@media (max-width: 900px) {
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(107, 107, 107, 0.842);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .customStylesModal {
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 21px -1px rgba(0, 0, 0, 0.75);
+    width: 80%;
+    min-height: 100px;
+    background-color: #fff;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1500px) {
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(107, 107, 107, 0.842);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .customStylesModal {
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 21px -1px rgba(0, 0, 0, 0.75);
+    width: 50%;
+    height: 40%;
+    min-height: 200px;
+    background-color: #fff;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1500px) {
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(107, 107, 107, 0.842);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .customStylesModal {
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 21px -1px rgba(0, 0, 0, 0.75);
+    width: 30%;
+    height: 20%;
+    min-height: 200px;
+    background-color: #fff;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
