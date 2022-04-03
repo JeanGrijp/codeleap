@@ -261,7 +261,7 @@ export const CreatePost = styled.form`
 export const Posts = styled.article`
 
   ${media.mobile} {
-    margin: 2% 0;
+    margin: 5% 0;
     width: 90%;
     border: 1px solid #000;
     border-radius: 5px;
@@ -284,13 +284,29 @@ export const Posts = styled.article`
     }
     
     div.post-content {
+
       width: 100%;
       height: 90%;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
       padding: 5%;
       word-break: break-all;
+      font-size: 0.8rem;
+
+
+      div.meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 5%;
+
+        p {
+          color: #c4c4c4;
+        }
+      }
     }
   }
 
@@ -324,10 +340,24 @@ export const Posts = styled.article`
       width: 100%;
       height: 90%;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
       padding: 2% 5%;
       word-break: break-all;
+
+      div.meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 5%;
+
+        p {
+          color: #c4c4c4;
+        }
+      }
+
     }
   }
 
@@ -351,7 +381,7 @@ export const Posts = styled.article`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2% 5%;
+      padding: 1.5% 5%;
       font-size: 1.3rem;
       word-break: break-all;
 
@@ -361,10 +391,24 @@ export const Posts = styled.article`
       width: 100%;
       height: 90%;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
       padding: 2% 5%;
       word-break: break-all;
+
+      div.meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 5%;
+
+        p {
+          color: #c4c4c4;
+        }
+      }
+
     }
   }
 `;

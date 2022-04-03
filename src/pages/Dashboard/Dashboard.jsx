@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Modal from 'react-modal';
+
+import moment from 'moment';
 import { UserContext } from '../../context/UserContext';
 import {
   CreatePost, DashboardContainer, FormDelete, FormEdit, Posts,
@@ -22,6 +24,8 @@ export default function Dashboard() {
   const [modalEditIsVisible, setModalEditIsVisible] = useState(false);
   const [modalDeleteIsVisible, setModalDeleteIsVisible] = useState(false);
 
+  moment.locale('pt-br');
+
   if (userName.length === 0) {
     navigate('/');
   }
@@ -41,12 +45,11 @@ export default function Dashboard() {
           onSubmit={(e) => {
             e.preventDefault();
             if (titleEdit.length > 0 && contentEdit.length > 0) {
-              const novoArray = [
-                ...posts.splice(0, indexEdit),
-                [titleEdit, contentEdit],
-                ...posts.splice(indexEdit + 1),
-              ];
-              setPosts(novoArray);
+              setPosts([
+                ...posts.slice(0, indexEdit),
+                [titleEdit, contentEdit, moment().format()],
+                ...posts.slice(indexEdit + 1),
+              ]);
               setModalEditIsVisible(false);
               setTitleEdit('');
               setContentEdit('');
@@ -90,11 +93,10 @@ export default function Dashboard() {
         <FormDelete
           onSubmit={(e) => {
             e.preventDefault();
-            const novoArray = [
-              ...posts.splice(0, indexEdit),
-              ...posts.splice(indexEdit + 1),
-            ];
-            setPosts(novoArray);
+            setPosts([
+              ...posts.slice(0, indexEdit),
+              ...posts.slice(indexEdit + 1),
+            ]);
             setModalDeleteIsVisible(false);
           }}
           disb={userName.length > 0}
@@ -129,7 +131,7 @@ export default function Dashboard() {
         onSubmit={(e) => {
           e.preventDefault();
           if (title.length > 0 && content.length > 0) {
-            setPosts([...posts, [title, content]]);
+            setPosts([...posts, [title, content, moment().format()]]);
             setTitle('');
             setContent('');
           }
@@ -163,7 +165,7 @@ export default function Dashboard() {
       </CreatePost>
       {posts.map((element, index) => (
 
-        <Posts>
+        <Posts key={`${element}`}>
           <div className="post-title">
             <h4>{element[0]}</h4>
             <div>
@@ -184,6 +186,14 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="post-content">
+            <div className="meta">
+              <p>{`@${userName}`}</p>
+              <p>
+                {' '}
+                {moment(element[2]).fromNow()}
+              </p>
+
+            </div>
             <p>{element[1]}</p>
           </div>
         </Posts>
