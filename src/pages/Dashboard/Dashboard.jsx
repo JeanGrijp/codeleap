@@ -164,7 +164,13 @@ export default function Dashboard() {
           />
         </label>
         <div className="btn">
-          <button type="submit">CREATE</button>
+          <button
+            disabled={!(title.length > 0 && content.length > 0)}
+            type="submit"
+          >
+            CREATE
+
+          </button>
         </div>
       </CreatePost>
       {posts.map((element, index) => (

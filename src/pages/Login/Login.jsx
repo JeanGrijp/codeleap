@@ -40,7 +40,7 @@ export default function Login() {
             </label>
           </div>
           <div className="step3">
-            <button type="submit">ENTER</button>
+            <button disabled={!(userName.length > 0)} type="submit">ENTER</button>
           </div>
         </Form>
       </Modal>
