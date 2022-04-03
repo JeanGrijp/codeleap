@@ -20,15 +20,19 @@ export default function Dashboard() {
   const [titleEdit, setTitleEdit] = useState('');
   const [contentEdit, setContentEdit] = useState('');
   const [indexEdit, setIndexEdit] = useState(0);
-
   const [modalEditIsVisible, setModalEditIsVisible] = useState(false);
   const [modalDeleteIsVisible, setModalDeleteIsVisible] = useState(false);
+  const [timeToRerender, setTimeToRerender] = useState(0);
 
   moment.locale('pt-br');
 
   if (userName.length === 0) {
     navigate('/');
   }
+
+  setInterval(() => {
+    setTimeToRerender(timeToRerender + 1);
+  }, 1000 * 30);
 
   return (
     <DashboardContainer>
