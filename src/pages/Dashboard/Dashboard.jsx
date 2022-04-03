@@ -1,8 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import Modal from 'react-modal';
 import { UserContext } from '../../context/UserContext';
-import { CreatePost, DashboardContainer, Posts } from './Dashboard.style';
+import {
+  CreatePost, DashboardContainer, FormDelete, FormEdit, Posts,
+} from './Dashboard.style';
+
+import style from './Dashboard.module.css';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -10,6 +15,12 @@ export default function Dashboard() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [posts, setPosts] = useState([]);
+  const [titleEdit, setTitleEdit] = useState('');
+  const [contentEdit, setContentEdit] = useState('');
+  const [indexEdit, setIndexEdit] = useState(0);
+
+  const [modalEditIsVisible, setModalEditIsVisible] = useState(false);
+  const [modalDeleteIsVisible, setModalDeleteIsVisible] = useState(false);
 
   if (userName.length === 0) {
     navigate('/');
@@ -17,8 +28,101 @@ export default function Dashboard() {
 
   return (
     <DashboardContainer>
+
+      <Modal
+        isOpen={modalEditIsVisible}
+        onRequestClose={() => {
+          setModalEditIsVisible(false);
+        }}
+        className={style.customStylesModal}
+        overlayClassName={style.overlay}
+      >
+        <FormEdit
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (titleEdit.length > 0 && contentEdit.length > 0) {
+              const novoArray = [
+                ...posts.splice(0, indexEdit),
+                [titleEdit, contentEdit],
+                ...posts.splice(indexEdit + 1),
+              ];
+              setPosts(novoArray);
+              setModalEditIsVisible(false);
+              setTitleEdit('');
+              setContentEdit('');
+            }
+          }}
+          disb={titleEdit.length > 0 && contentEdit.length > 0}
+        >
+          <h4>Edit item</h4>
+          <label htmlFor="title">
+            Title
+            <input
+              value={titleEdit}
+              onChange={(e) => setTitleEdit(e.target.value)}
+              id="title"
+              type="text"
+              placeholder="Hello World"
+            />
+          </label>
+          <label htmlFor="content">
+            Content
+            <textarea
+              value={contentEdit}
+              onChange={(e) => setContentEdit(e.target.value)}
+              id="content"
+              type="text"
+              placeholder="Content here"
+            />
+          </label>
+          <div className="btn">
+            <button type="submit">SAVE</button>
+          </div>
+        </FormEdit>
+      </Modal>
+
+      <Modal
+        isOpen={modalDeleteIsVisible}
+        onRequestClose={() => setModalDeleteIsVisible(false)}
+        className={style.customStylesModal}
+        overlayClassName={style.overlay}
+      >
+        <FormDelete
+          onSubmit={(e) => {
+            e.preventDefault();
+            const novoArray = [
+              ...posts.splice(0, indexEdit),
+              ...posts.splice(indexEdit + 1),
+            ];
+            setPosts(novoArray);
+            setModalDeleteIsVisible(false);
+          }}
+          disb={userName.length > 0}
+        >
+          <h4>Are you sure you want to delete this item?</h4>
+
+          <div className="btn">
+            <button
+              onClick={() => setModalDeleteIsVisible(false)}
+              type="button"
+            >
+              Cancel
+
+            </button>
+            <button type="submit">OK</button>
+          </div>
+        </FormDelete>
+      </Modal>
+
       <div className="sup">
         <h1>CodeLeap Network</h1>
+        <h5>
+          Olá
+          {' '}
+          {userName}
+          {' '}
+          😊
+        </h5>
       </div>
       <CreatePost
         disb={title.length > 0 && content.length > 0}
@@ -29,29 +133,54 @@ export default function Dashboard() {
             setTitle('');
             setContent('');
           }
+          console.log(posts);
         }}
       >
         <h4>What’s on your mind?</h4>
         <label htmlFor="title">
           Title
-          <input value={title} onChange={(e) => setTitle(e.target.value)} id="title" type="text" placeholder="Hello World" />
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            id="title"
+            type="text"
+            placeholder="Hello World"
+          />
         </label>
         <label htmlFor="content">
           Content
-          <textarea value={content} onChange={(e) => setContent(e.target.value)} id="content" type="text" placeholder="Content here" />
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            id="content"
+            type="text"
+            placeholder="Content here"
+          />
         </label>
         <div className="btn">
           <button type="submit">CREATE</button>
         </div>
       </CreatePost>
-      {posts.map((element) => (
+      {posts.map((element, index) => (
 
         <Posts>
           <div className="post-title">
             <h4>{element[0]}</h4>
             <div>
-              <FaEdit style={{ margin: '0 5px' }} />
-              <FaTrashAlt style={{ margin: '0 5px' }} />
+              <FaEdit
+                onClick={() => {
+                  setIndexEdit(index);
+                  setModalEditIsVisible(true);
+                }}
+                style={{ margin: '0 5px', cursor: 'pointer' }}
+              />
+              <FaTrashAlt
+                onClick={() => {
+                  setIndexEdit(index);
+                  setModalDeleteIsVisible(true);
+                }}
+                style={{ margin: '0 5px', cursor: 'pointer' }}
+              />
             </div>
           </div>
           <div className="post-content">
