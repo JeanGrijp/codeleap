@@ -48,4 +48,23 @@ describe('<Login />', () => {
 
     expect(btn).toBeDisabled();
   });
+
+  it('O botão de criação do post deve está habilitado quando o usuário inserir algum valor.', () => {
+    render(
+      <UserContextProvider>
+        <BrowserRouter>
+          <Dashboard />
+        </BrowserRouter>
+      </UserContextProvider>,
+    );
+
+    const title = screen.getByPlaceholderText('Hello World');
+    const content = screen.getByPlaceholderText('Content here');
+    userEvent.type(title, '');
+    userEvent.type(content, '');
+
+    const btn = screen.getByRole('button', { name: /CREATE/i });
+
+    expect(btn).toBeDisabled();
+  });
 });
