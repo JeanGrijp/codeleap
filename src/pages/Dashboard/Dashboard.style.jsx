@@ -16,11 +16,21 @@ export const DashboardContainer = styled.section`
       height: 8vh;
       background-color: #000;
       color: #FFF;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 5%;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h5 {
+          margin-right: 10px;
+        }
+      }
     }
     
   }
@@ -38,11 +48,21 @@ export const DashboardContainer = styled.section`
       height: 8vh;
       background-color: #000;
       color: #FFF;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 5%;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h5 {
+          margin-right: 10px;
+        }
+      }
     }
   }
 
@@ -59,11 +79,21 @@ export const DashboardContainer = styled.section`
       height: 8vh;
       background-color: #000;
       color: #FFF;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 5%;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h5 {
+          margin-right: 10px;
+        }
+      }
     }
   }
 `;
