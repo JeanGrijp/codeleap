@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import media from '../../utils/media';
 
 const HomeContainer = styled.main`
-
   ${media.mobile} {
     width: 100%;
     height: 100vh;
@@ -13,7 +12,6 @@ const HomeContainer = styled.main`
     img {
       width: 80%;
     }
-
   }
   ${media.desktopMiddle} {
     width: 100%;
@@ -21,7 +19,6 @@ const HomeContainer = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
-
     img {
       width: 50%;
     }
@@ -32,13 +29,10 @@ const HomeContainer = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
-
     img {
       width: 20%;
     }
   }
-
-
 `;
 
 export default HomeContainer;
