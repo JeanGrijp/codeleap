@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Modal from 'react-modal';
-
+import { BiExit } from 'react-icons/bi';
 import moment from 'moment';
 import { UserContext } from '../../context/UserContext';
 import {
@@ -13,7 +13,7 @@ import style from './Dashboard.module.css';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { userName } = useContext(UserContext);
+  const { userName, setUserName } = useContext(UserContext);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [posts, setPosts] = useState([]);
@@ -32,7 +32,24 @@ export default function Dashboard() {
 
   setInterval(() => {
     setTimeToRerender(timeToRerender + 1);
-  }, 1000 * 30);
+  }, 1000 * 60);
+
+  useEffect(() => {
+    try {
+      const postsUpdate = localStorage.getItem('posts');
+      if (postsUpdate === null) {
+        localStorage.setItem('posts', posts);
+      } else {
+        const newArray = JSON.parse(postsUpdate);
+        setPosts(newArray);
+        console.log(`New Array ${newArray}`);
+        console.log(`Posts ${posts}`);
+        console.log('');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   return (
     <DashboardContainer>
@@ -51,12 +68,13 @@ export default function Dashboard() {
             if (titleEdit.length > 0 && contentEdit.length > 0) {
               setPosts([
                 ...posts.slice(0, indexEdit),
-                [titleEdit, contentEdit, moment().format()],
+                [titleEdit, contentEdit, moment().format(), userName],
                 ...posts.slice(indexEdit + 1),
               ]);
               setModalEditIsVisible(false);
               setTitleEdit('');
               setContentEdit('');
+              localStorage.setItem('posts', JSON.stringify(posts));
             }
           }}
           disb={titleEdit.length > 0 && contentEdit.length > 0}
@@ -102,6 +120,7 @@ export default function Dashboard() {
               ...posts.slice(indexEdit + 1),
             ]);
             setModalDeleteIsVisible(false);
+            localStorage.setItem('posts', posts);
           }}
           disb={userName.length > 0}
         >
@@ -122,24 +141,35 @@ export default function Dashboard() {
 
       <div className="sup">
         <h1>CodeLeap Network</h1>
-        <h5>
-          Olá
-          {' '}
-          {userName}
-          {' '}
-          😊
-        </h5>
+        <div>
+
+          <h5>
+            Olá
+            {' '}
+            {userName}
+            {' '}
+            😊
+          </h5>
+          <BiExit
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              setUserName('');
+              navigate('/');
+            }}
+          />
+        </div>
       </div>
       <CreatePost
         disb={title.length > 0 && content.length > 0}
         onSubmit={(e) => {
           e.preventDefault();
           if (title.length > 0 && content.length > 0) {
-            setPosts([...posts, [title, content, moment().format()]]);
+            const aux = [[title, content, moment().format(), userName], ...posts];
+            setPosts(aux);
             setTitle('');
             setContent('');
+            localStorage.setItem('posts', JSON.stringify(aux));
           }
-          console.log(posts);
         }}
       >
         <h4>What’s on your mind?</h4>
@@ -173,33 +203,38 @@ export default function Dashboard() {
           </button>
         </div>
       </CreatePost>
-      {posts.map((element, index) => (
+      { posts.map((element, index) => (
 
         <Posts key={`${element}`}>
           <div className="post-title">
             <h4>{element[0]}</h4>
-            <div>
-              <FaEdit
-                onClick={() => {
-                  setIndexEdit(index);
-                  setTitleEdit(element[0]);
-                  setContentEdit(element[1]);
-                  setModalEditIsVisible(true);
-                }}
-                style={{ margin: '0 5px', cursor: 'pointer' }}
-              />
-              <FaTrashAlt
-                onClick={() => {
-                  setIndexEdit(index);
-                  setModalDeleteIsVisible(true);
-                }}
-                style={{ margin: '0 5px', cursor: 'pointer' }}
-              />
-            </div>
+            {element[3] === userName
+
+              ? (
+                <div>
+                  <FaEdit
+                    onClick={() => {
+                      setIndexEdit(index);
+                      setTitleEdit(element[0]);
+                      setContentEdit(element[1]);
+                      setModalEditIsVisible(true);
+                    }}
+                    style={{ margin: '0 5px', cursor: 'pointer' }}
+                  />
+                  <FaTrashAlt
+                    onClick={() => {
+                      setIndexEdit(index);
+                      setModalDeleteIsVisible(true);
+                    }}
+                    style={{ margin: '0 5px', cursor: 'pointer' }}
+                  />
+                </div>
+              )
+              : <div />}
           </div>
           <div className="post-content">
             <div className="meta">
-              <p>{`@${userName}`}</p>
+              <p>{`@${element[3]}`}</p>
               <p>
                 {' '}
                 {moment(element[2]).fromNow()}
@@ -210,7 +245,7 @@ export default function Dashboard() {
           </div>
         </Posts>
 
-      ))}
+      )) }
     </DashboardContainer>
   );
 }
