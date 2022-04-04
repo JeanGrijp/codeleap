@@ -182,6 +182,8 @@ export default function Dashboard() {
               <FaEdit
                 onClick={() => {
                   setIndexEdit(index);
+                  setTitleEdit(element[0]);
+                  setContentEdit(element[1]);
                   setModalEditIsVisible(true);
                 }}
                 style={{ margin: '0 5px', cursor: 'pointer' }}
