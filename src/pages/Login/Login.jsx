@@ -36,11 +36,23 @@ export default function Login() {
           <div className="step2">
             <label htmlFor="login">
               Please enter your username
-              <input id="login" onChange={(e) => setUserName(e.target.value)} value={userName} type="text" placeholder="Enter your username" />
+              <input
+                id="login"
+                onChange={(e) => setUserName(e.target.value)}
+                value={userName}
+                type="text"
+                placeholder="Enter your username"
+              />
             </label>
           </div>
           <div className="step3">
-            <button disabled={(userName.length > 0)} type="submit">ENTER</button>
+            <button
+              disabled={!(userName.length > 0)}
+              type="submit"
+            >
+              ENTER
+
+            </button>
           </div>
         </Form>
       </Modal>

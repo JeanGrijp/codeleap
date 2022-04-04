@@ -42,9 +42,6 @@ export default function Dashboard() {
       } else {
         const newArray = JSON.parse(postsUpdate);
         setPosts(newArray);
-        console.log(`New Array ${newArray}`);
-        console.log(`Posts ${posts}`);
-        console.log('');
       }
     } catch (error) {
       console.log(error);
@@ -88,6 +85,7 @@ export default function Dashboard() {
               id="title"
               type="text"
               placeholder="Hello World"
+              data-testid="title"
             />
           </label>
           <label htmlFor="content">
@@ -98,6 +96,7 @@ export default function Dashboard() {
               id="content"
               type="text"
               placeholder="Content here"
+              data-testid="content"
             />
           </label>
           <div className="btn">
@@ -181,6 +180,7 @@ export default function Dashboard() {
             id="title"
             type="text"
             placeholder="Hello World"
+            max={500}
           />
         </label>
         <label htmlFor="content">
@@ -191,6 +191,8 @@ export default function Dashboard() {
             id="content"
             type="text"
             placeholder="Content here"
+            max={50000}
+
           />
         </label>
         <div className="btn">
