@@ -22,7 +22,7 @@ export default function Dashboard() {
   const [indexEdit, setIndexEdit] = useState(0);
   const [modalEditIsVisible, setModalEditIsVisible] = useState(false);
   const [modalDeleteIsVisible, setModalDeleteIsVisible] = useState(false);
-  const [timeToRerender, setTimeToRerender] = useState(0);
+  // const [timeToRerender, setTimeToRerender] = useState(0);
 
   moment.locale('pt-br');
 
@@ -30,9 +30,9 @@ export default function Dashboard() {
     navigate('/');
   }
 
-  setInterval(() => {
-    setTimeToRerender(timeToRerender + 1);
-  }, 1000 * 60);
+  // setInterval(() => {
+  //   setTimeToRerender(timeToRerender + 1);
+  // }, 1000 * 60);
 
   useEffect(() => {
     try {
@@ -47,6 +47,8 @@ export default function Dashboard() {
       console.log(error);
     }
   }, []);
+
+  console.log('renderizou');
 
   return (
     <DashboardContainer>
@@ -85,7 +87,7 @@ export default function Dashboard() {
               id="title"
               type="text"
               placeholder="Hello World"
-              data-testid="title"
+              data-testid="titleEdit"
             />
           </label>
           <label htmlFor="content">
@@ -96,7 +98,7 @@ export default function Dashboard() {
               id="content"
               type="text"
               placeholder="Content here"
-              data-testid="content"
+              data-testid="contentEdit"
             />
           </label>
           <div className="btn">
@@ -128,6 +130,7 @@ export default function Dashboard() {
           <div className="btn">
             <button
               onClick={() => setModalDeleteIsVisible(false)}
+              data-testid="buttonDeletePost"
               type="button"
             >
               Cancel
@@ -142,7 +145,7 @@ export default function Dashboard() {
         <h1>CodeLeap Network</h1>
         <div>
 
-          <h5>
+          <h5 data-testid="userName">
             Olá
             {' '}
             {userName}
@@ -151,6 +154,7 @@ export default function Dashboard() {
           </h5>
           <BiExit
             style={{ cursor: 'pointer' }}
+            data-testid="exitButton"
             onClick={() => {
               setUserName('');
               navigate('/');
@@ -181,6 +185,7 @@ export default function Dashboard() {
             type="text"
             placeholder="Hello World"
             max={500}
+            data-testid="title"
           />
         </label>
         <label htmlFor="content">
@@ -192,6 +197,7 @@ export default function Dashboard() {
             type="text"
             placeholder="Content here"
             max={50000}
+            data-testid="content"
 
           />
         </label>
@@ -199,8 +205,11 @@ export default function Dashboard() {
           <button
             disabled={!(title.length > 0 && content.length > 0)}
             type="submit"
+            data-testid="CREATE"
+
           >
             CREATE
+            {' '}
 
           </button>
         </div>
@@ -215,6 +224,7 @@ export default function Dashboard() {
               ? (
                 <div>
                   <FaEdit
+                    data-testid="editModalPostButton"
                     onClick={() => {
                       setIndexEdit(index);
                       setTitleEdit(element[0]);
@@ -224,6 +234,7 @@ export default function Dashboard() {
                     style={{ margin: '0 5px', cursor: 'pointer' }}
                   />
                   <FaTrashAlt
+                    data-testid="deleteModalPostButton"
                     onClick={() => {
                       setIndexEdit(index);
                       setModalDeleteIsVisible(true);
@@ -236,7 +247,7 @@ export default function Dashboard() {
           </div>
           <div className="post-content">
             <div className="meta">
-              <p>{`@${element[3]}`}</p>
+              <p data-testid="userNamePost">{`@${element[3]}`}</p>
               <p>
                 {' '}
                 {moment(element[2]).fromNow()}
