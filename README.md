@@ -1,6 +1,7 @@
 # CodeLeap Challenge
 
-![GitHub top language](https://img.shields.io/github/languages/top/JeanGrijp/codeleap) ![GitHub repo size](https://img.shields.io/github/repo-size/JeanGrijp/codeleap)![GitHub watchers](https://img.shields.io/github/watchers/JeanGrijp/codeleap?style=social) ![](https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg) ![](http://ForTheBadge.com/images/badges/built-by-developers.svg) ![](http://ForTheBadge.com/images/badges/built-with-love.svg)
+![GitHub top language](https://img.shields.io/github/languages/top/JeanGrijp/codeleap) ![GitHub repo size](https://img.shields.io/github/repo-size/JeanGrijp/codeleap)![GitHub watchers](https://img.shields.io/github/watchers/JeanGrijp/codeleap?style=social) ![](https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg) 
+![](http://ForTheBadge.com/images/badges/built-by-developers.svg) ![](http://ForTheBadge.com/images/badges/built-with-love.svg)
 
 [CodeLeap's](https://codeleap.co.uk/) selection process challenge.
 
