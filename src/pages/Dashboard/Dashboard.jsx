@@ -10,6 +10,7 @@ import {
 } from './Dashboard.style';
 
 import style from './Dashboard.module.css';
+import useFetch from '../../Hooks/useFetch';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -47,6 +48,26 @@ export default function Dashboard() {
       console.log(error);
     }
   }, []);
+
+  const { data: dataPost, isFetching: loadPost } = useFetch('posts');
+  const { data: dataUsers, isFetching: loadUsers } = useFetch('users');
+
+  // const handleClickPost = (num) => {
+  //   const { data: dataPost, load } = useQuery('posts', async () => {
+  //     const response = await api.get(`posts/${num}`);
+  //     return response.data;
+  //   }, {
+  //     refetchOnWindowFocus: true,
+  //     staleTime: 1000 * 60,
+  //   });
+
+  //   return { dataPost, load };
+  // };
+
+  console.log(dataPost);
+  console.log(loadPost);
+  console.log(dataUsers);
+  console.log(loadUsers);
 
   console.log('renderizou');
 
@@ -259,6 +280,45 @@ export default function Dashboard() {
         </Posts>
 
       )) }
+
+      {
+        dataPost
+          ? dataPost.map((element) => (
+            <Posts
+              key={`${element.id}`}
+              onClick={() => {
+                console.log({ ...dataPost, ...dataUsers });
+              }}
+            >
+              <div className="post-title">
+                <h4>{element.title}</h4>
+
+                {/* <div>
+                  <FaEdit
+                    data-testid="editModalPostButton"
+                    style={{ margin: '0 5px', cursor: 'pointer' }}
+                  />
+                  <FaTrashAlt
+                    data-testid="deleteModalPostButton"
+                    style={{ margin: '0 5px', cursor: 'pointer' }}
+                  />
+                </div> */}
+
+              </div>
+              <div className="post-content">
+                <div className="meta">
+                  <p data-testid="userNamePost">{`@${element.id}`}</p>
+                  <p>
+                    {' '}
+                    {moment(element[2]).fromNow()}
+                  </p>
+
+                </div>
+                <p>{element.body}</p>
+              </div>
+            </Posts>
+          )) : <div />
+      }
     </DashboardContainer>
   );
 }
